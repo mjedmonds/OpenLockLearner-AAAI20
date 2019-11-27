@@ -1,0 +1,10 @@
+*.pyc
+*.egg-info
+*.egg
+.idea
+*.bak
+build
+dist
+openlockagents/OpenLockLearner/perceptual_causality/all_matlab_dat
+assets
+*.so
