@@ -1,8 +1,8 @@
 # OpenLock Learner
 
-This repo contains the code for the agents in the AAAI 2020 Oral paper "Theory-based Causal Transfer: Integrating Instance-level Induction and Abstract-level Structure Learning." 
+This repo contains the code for the agents in the AAAI 2020 Oral paper "Theory-based Causal Transfer: Integrating Instance-level Induction and Abstract-level Structure Learning." For the paper and additional details, please see the [project page](https://mjedmonds.com/projects/OpenLock/AAAI20_OpenLockLearner.html).
 
-It provides various agents to use with the OpenLock OpenAI Gym environment [https://github.com/mjedmonds/OpenLock](https://github.com/mjedmonds/OpenLock)
+It provides various agents to use with the [OpenLock OpenAI Gym environment](https://github.com/mjedmonds/OpenLock)
 
 You'll need to bring in the OpenLock repo into your `PYTHONPATH` for this repo. If you are using a virtualenv, you can add `export PYTHONPATH="/path/to/OpenLock"` to `/bin/activate`. Alternatively, you can `python setup.py install` OpenLock to add it as a package to your python environment.
 
