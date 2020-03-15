@@ -18,6 +18,7 @@ You can run any of the agents in the `openlockagents` directory. The main python
 python openlockagents/OpenLockLearner/main/openlock_learner_open_lock.py 
 ```
 
+## Bibtex
 If you use this repo, please cite our work:
 
 ```
