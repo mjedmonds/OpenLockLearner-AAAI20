@@ -6,14 +6,6 @@ from Cython.Build import cythonize
 
 
 extensions = [
-    Extension(
-        "openlockagents.OpenLockLearner.causal_classes.CausalRelationManager",
-        ["openlockagents/OpenLockLearner/causal_classes/CausalRelationManager.py"],
-    ),
-    Extension(
-        "openlockagents.OpenLockLearner.causal_classes.CausalChainManagerDeprecated",
-        ["openlockagents/OpenLockLearner/causal_classes/CausalChainManagerDeprecated.py"],
-    ),
 ]
 
 
