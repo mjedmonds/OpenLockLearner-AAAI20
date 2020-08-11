@@ -12,7 +12,6 @@
 
 import os
 import threading, time
-from multiprocessing import Process
 import multiprocessing
 import sys
 import numpy as np
@@ -20,7 +19,7 @@ import tensorflow as tf
 import gym
 
 
-from openlockagents.agent import Agent, ROOT_DIR
+from openlockagents.common.agent import ROOT_DIR
 from openlockagents.A3C.worker import Worker
 from openlockagents.A3C.ac_network import AC_Network
 from openlockagents.A3C.A3C_agent import A3CAgent

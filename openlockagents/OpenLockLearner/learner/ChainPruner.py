@@ -10,7 +10,7 @@ from openlockagents.OpenLockLearner.util.common import (
     PARALLEL_MAX_NBYTES,
 )
 
-from openlockagents.common import DEBUGGING
+from openlockagents.common.common import DEBUGGING
 from openlockagents.OpenLockLearner.util.common import print_message
 
 

@@ -2,9 +2,7 @@ import time
 import texttable
 import sys
 import os
-import copy
 import atexit
-import json
 import jsonpickle
 import random
 import gym
@@ -14,11 +12,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-from openlockagents.logger_agent import SubjectLogger, SubjectWriter
-from openlock.settings_trial import select_trial, get_trial, get_possible_trials
-import openlock.common as common
+from openlockagents.common.logger_agent import SubjectLogger, SubjectWriter
+from openlock.settings_trial import get_possible_trials
 from openlock.envs.openlock_env import ObservationSpace
-from openlockagents.common import ROOT_DIR, DEBUGGING
+from openlockagents.common.common import ROOT_DIR
 from openlockagents.OpenLockLearner.util.common import write_source_code
 
 

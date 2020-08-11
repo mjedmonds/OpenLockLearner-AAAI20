@@ -6,7 +6,7 @@ import random
 import numpy as np
 
 # import agent (OpenLockAgents must be in PYTHONPATH)
-from openlockagents.agent import Agent
+from openlockagents.common.agent import Agent
 
 from openlockagents.OpenLockLearner.causal_classes.OutcomeSpace import (
     Outcome,
@@ -27,11 +27,10 @@ from openlockagents.OpenLockLearner.causal_classes.StructureAndBeliefSpaceWrappe
 )
 from openlockagents.OpenLockLearner.causal_classes.SchemaStructureSpace import (
     AtomicSchemaStructureSpace,
-    AbstractSchemaStructureSpace,
     InstantiatedSchemaStructureSpace,
 )
-from openlockagents.common import DEBUGGING
-from openlockagents.OpenLockLearner.util.common import print_message, AblationParams
+from openlockagents.common.common import DEBUGGING
+from openlockagents.OpenLockLearner.util.common import print_message
 from openlockagents.OpenLockLearner.learner.CausalLearner import CausalLearner
 from openlockagents.OpenLockLearner.learner.InterventionSelector import (
     InterventionSelector,
@@ -39,9 +38,6 @@ from openlockagents.OpenLockLearner.learner.InterventionSelector import (
 from openlockagents.OpenLockLearner.learner.ModelBasedRL import ModelBasedRLAgent
 from openlockagents.OpenLockLearner.util.util import (
     generate_solutions_by_trial_causal_relation,
-)
-from openlockagents.OpenLockLearner.util.common import (
-    verify_valid_probability_distribution,
 )
 
 from openlock.common import ENTITY_STATES, Action

@@ -1,4 +1,3 @@
-import gym
 import time
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -7,35 +6,21 @@ import os
 
 # must include this to unpickle properly
 
-from openlockagents.OpenLockLearner.util.common import CAUSAL_CHAIN_EDGES, parse_arguments
 from openlockagents.OpenLockLearner.learner.OpenLockLearnerAgent import (
     OpenLockLearnerAgent,
 )
-from openlockagents.OpenLockLearner.generator.chain_generator import (
-    generate_chain_structure_space,
-)
-from openlockagents.agent import Agent
+from openlockagents.common.agent import Agent
 
-from openlockagents.OpenLockLearner.io.causal_structure_io import (
-    write_causal_structure_space,
-    write_schema_structure_space,
-)
 from openlockagents.OpenLockLearner.io.causal_structure_io import (
     load_causal_structures_from_file,
 )
-from openlockagents.OpenLockLearner.causal_classes.SchemaStructureSpace import (
-    AbstractSchemaStructureSpace,
-)
-from openlockagents.OpenLockLearner.perceptual_causality_python.perceptual_causality import (
-    generate_perceptually_causal_relations,
-    load_perceptually_causal_relations,
-)
 from openlockagents.OpenLockLearner.util.common import (
-    FLUENTS,
-    FLUENT_STATES,
-    ACTIONS,
+    parse_arguments,
     AblationParams,
+    setup_structure_space_paths
 )
+
+from openlockagents.OpenLockLearner.main.generate_causal_structures import generate_causal_structures
 
 from openlock.settings_trial import PARAMS
 from openlock.common import generate_effect_probabilities
@@ -126,58 +111,11 @@ def main():
     env = Agent.pre_instantiation_setup(params, bypass_confirmation)
     env.lever_index_mode = "position"
 
-    # todo: this assumes attributes are the same between training and test - reasonable, but would be best to generalize
-    attributes = [env.attribute_labels[attribute] for attribute in env.attribute_order]
+    causal_chain_structure_space_path, two_solution_schemas_structure_space_path, three_solution_schemas_structure_space_path = setup_structure_space_paths()
 
-    structure = CAUSAL_CHAIN_EDGES
-
-    generate_causal_structures = False
-    causal_chain_structure_space_path = os.path.expanduser(
-        "~/Desktop/openlocklearner_causal_chain_space.pickle"
-    )
-    two_solution_schemas_structure_space_path = os.path.expanduser(
-        "~/Desktop/two_solution_schemas.pickle"
-    )
-    three_solution_schemas_structure_space_path = os.path.expanduser(
-        "~/Desktop/three_solution_schemas.pickle"
-    )
-    if generate_causal_structures:
-        perceptually_causal_relations = None
-        causal_chain_structure_space = generate_chain_structure_space(
-            env=env,
-            actions=ACTIONS,
-            attributes=attributes,
-            fluents=FLUENTS,
-            fluent_states=FLUENT_STATES,
-            perceptually_causal_relations=perceptually_causal_relations,
-            structure=structure,
-        )
-        write_causal_structure_space(
-            causal_chain_structure_space=causal_chain_structure_space,
-            causal_chain_structure_space_path=causal_chain_structure_space_path,
-        )
-
-        t = time.time()
-
-        two_solution_schemas = AbstractSchemaStructureSpace(
-            causal_chain_structure_space.structure, 2, draw_chains=False
-        )
-        write_schema_structure_space(
-            schema_structure_space=two_solution_schemas,
-            schema_structure_space_path=two_solution_schemas_structure_space_path,
-        )
-
-        three_solution_schemas = AbstractSchemaStructureSpace(
-            causal_chain_structure_space.structure, 3, draw_chains=False
-        )
-        write_schema_structure_space(
-            schema_structure_space=three_solution_schemas,
-            schema_structure_space_path=three_solution_schemas_structure_space_path,
-        )
-
-        print("Schema generation time: {}s".format(time.time() - t))
-
-        return
+    if not os.path.exists(causal_chain_structure_space_path):
+        print("WARNING: no hypothesis space files found, generating hypothesis spaces")
+        generate_causal_structures()
 
     interventions_predefined = []
     # interventions_predefined = [("push_LOWERLEFT", "push_UPPERRIGHT", "push_door")]
@@ -231,19 +169,20 @@ def main():
             )
 
         # testing
-        trial_selected, chain_idxs_pruned_from_initial_observation = agent.setup_trial(
-            scenario_name=params["test_scenario_name"],
-            action_limit=params["test_action_limit"],
-            attempt_limit=params["test_attempt_limit"],
-        )
+        if params["test_scenario_name"] == "CE4" or params["test_scenario_name"] == "CC4":
+            trial_selected, chain_idxs_pruned_from_initial_observation = agent.setup_trial(
+                scenario_name=params["test_scenario_name"],
+                action_limit=params["test_action_limit"],
+                attempt_limit=params["test_attempt_limit"],
+            )
 
-        agent.run_trial_openlock_learner(
-            trial_selected,
-            num_steps_with_no_pruning_to_finish_trial,
-            interventions_predefined=interventions_predefined,
-            chain_idxs_pruned_from_initial_observation=chain_idxs_pruned_from_initial_observation,
-            intervention_mode=params["intervention_mode"],
-        )
+            agent.run_trial_openlock_learner(
+                trial_selected,
+                num_steps_with_no_pruning_to_finish_trial,
+                interventions_predefined=interventions_predefined,
+                chain_idxs_pruned_from_initial_observation=chain_idxs_pruned_from_initial_observation,
+                intervention_mode=params["intervention_mode"],
+            )
 
         agent.print_agent_summary()
         print(

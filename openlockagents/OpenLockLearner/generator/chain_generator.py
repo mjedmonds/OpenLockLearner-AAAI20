@@ -17,14 +17,7 @@ from openlockagents.OpenLockLearner.causal_classes.CausalRelationSpace import (
 )
 from openlockagents.OpenLockLearner.causal_classes.CausalChain import CausalChainCompact
 from openlockagents.OpenLockLearner.util.common import (
-    FIXED_STRUCTURE_GRAPH_PATH,
-    ARBITRARY_STRUCTURE_GRAPH_PATH,
-    ACTION_REGEX_STR,
-    STATE_REGEX_STR,
     TRUE_GRAPH_CPT_CHOICES,
-    GRAPH_BATCH_SIZE,
-    CAUSAL_GRAPH_MANAGER_BACKEND,
-    PARALLEL_MAX_NBYTES,
 )
 
 

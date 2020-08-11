@@ -3,17 +3,12 @@ This file loads subject data from a file and replays the actions the agent took.
 
 Used to create videos of executions
 """
-import glob
-import re
 import jsonpickle
 import json
-import numpy as np
 
-
-from openlockagents.OpenLockLearner.io.data_loader import load_subject_data_from_json
-from openlockagents.agent import Agent
+from openlockagents.common.io.log_io import load_subject_data
+from openlockagents.common.agent import Agent
 from openlockagents.OpenLockLearner.util.common import decode_bad_jsonpickle_str
-from openlock.common import Action
 
 
 def main():
@@ -29,7 +24,7 @@ def main():
 
 
 def replay_subject_data(subject_dir):
-    subject_data = load_subject_data_from_json(subject_dir, use_json_pickle_for_trial=False)
+    subject_data = load_subject_data(subject_dir, use_json_pickle_for_trial=False)
 
     print("Replaying subject {}".format(subject_data.subject_id))
 

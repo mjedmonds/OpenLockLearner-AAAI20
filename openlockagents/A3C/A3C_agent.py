@@ -2,7 +2,7 @@ import numpy as np
 import random
 import os
 import copy
-from openlockagents.agent import Agent, DEBUGGING
+from openlockagents.common.agent import Agent, DEBUGGING
 
 from collections import deque
 import tensorflow as tf

@@ -11,7 +11,7 @@ from openlockagents.OpenLockLearner.util.common import (
     merge_solutions_from_dict_of_trials,
 )
 from openlockagents.OpenLockLearner.io.causal_structure_io import load_causal_chain_space
-from openlockagents.OpenLockLearner.io.data_loader import load_solutions_by_trial
+from openlockagents.common.io.log_io import load_solutions_by_trial
 from openlockagents.OpenLockLearner.generator.chain_generator import (
     generate_causal_chains_fixed_structure_attributes,
     generate_true_chains,

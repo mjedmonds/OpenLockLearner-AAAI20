@@ -14,7 +14,7 @@ import numpy as np
 from tensorboardX import SummaryWriter
 
 from openlock.logger_env import ActionLog, AttemptLog, TrialLog
-from openlockagents.OpenLockLearner.util.common import pretty_write, write_pickle
+from openlockagents.common.io.log_io import pretty_write, write_pickle
 
 
 class SubjectLogger(object):

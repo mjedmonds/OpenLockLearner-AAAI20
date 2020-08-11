@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import tensorflow as tf
 
-from openlockagents.agent import Agent, ROOT_DIR
+from openlockagents.common.agent import Agent, ROOT_DIR
 
 # MUST IMPORT FROM openlock to properly register the environment
 from openlock.settings_trial import PARAMS, IDX_TO_PARAMS

@@ -17,7 +17,7 @@ from openlockagents.OpenLockLearner.util.common import (
     renormalize,
     verify_valid_probability_distribution,
 )
-from openlockagents.common import DEBUGGING
+from openlockagents.common.common import DEBUGGING
 
 MAX_ENERGY = sys.float_info.max
 

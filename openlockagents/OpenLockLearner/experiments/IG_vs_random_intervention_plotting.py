@@ -1,10 +1,8 @@
 
 import os
-import json
-import jsonpickle
 
 import openlockagents.OpenLockLearner.util.plotter as plotter
-from openlockagents.agent import load_agent
+from openlockagents.common.agent import load_agent
 
 base_path = os.path.expanduser("~/Dropbox/Research/Causality/OpenLockExperiments/information_gain_vs_random_intervention_selection_tests/simplified_testing_scenario_2018_11_07")
 

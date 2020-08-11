@@ -10,9 +10,9 @@ from collections import defaultdict
 from openlockagents.OpenLockLearner.util.common import (
     check_for_duplicates,
     SANITY_CHECK_ELEMENT_LIMIT,
-    pretty_write,
     ALL_CAUSAL_CHAINS,
 )
+from openlockagents.common.io.log_io import pretty_write
 
 from openlock.logger_env import ActionLog
 

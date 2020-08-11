@@ -1,4 +1,4 @@
-from openlockagents.agent import Agent
+from openlockagents.common.agent import Agent
 
 
 class HumanAgent(Agent):

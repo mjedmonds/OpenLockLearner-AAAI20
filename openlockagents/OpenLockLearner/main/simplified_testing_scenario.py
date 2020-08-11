@@ -1,7 +1,5 @@
-import gym
 import numpy as np
 import time
-import pickle
 import os
 
 from openlockagents.OpenLockLearner.util.common import CAUSAL_CHAIN_EDGES
@@ -14,27 +12,18 @@ from openlockagents.OpenLockLearner.learner.OpenLockLearnerAgent import (
     OpenLockLearnerAgent,
 )
 
-from openlockagents.OpenLockLearner.generator.chain_generator import (
-    generate_chain_structure_space,
-)
 
-from openlockagents.OpenLockLearner.io.causal_structure_io import (
-    write_causal_structure_space,
-    write_schema_structure_space,
-)
-
-from openlockagents.agent import Agent
+from openlockagents.common.agent import Agent
 
 from openlockagents.OpenLockLearner.util.common import FLUENTS, FLUENT_STATES, ACTIONS, AblationParams
 
 from openlockagents.OpenLockLearner.io.causal_structure_io import (
     load_causal_structures_from_file,
 )
-from openlockagents.OpenLockLearner.causal_classes.SchemaStructureSpace import (
-    AbstractSchemaStructureSpace,
-)
 
-from openlock.settings_trial import PARAMS, SIMPLIFIED_THREE_LEVER_TRIALS
+from openlockagents.OpenLockLearner.causal_classes.hypothesis_space import generate_hypothesis_space
+
+from openlock.settings_trial import PARAMS
 from openlock.common import generate_effect_probabilities
 
 

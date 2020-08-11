@@ -1,16 +1,14 @@
-import gym
 import sys
-import os
 import atexit
 import time
 
 from openlockagents.Human.human_agent import HumanAgent
-from openlockagents.common import ROOT_DIR
-from openlockagents.agent import Agent
+from openlockagents.common.agent import Agent
 
 from openlock.settings_scenario import select_scenario
 from openlock.settings_trial import PARAMS, IDX_TO_PARAMS
 from openlock.common import generate_effect_probabilities
+import openlockagents.Human.common as common
 
 # def exit_handler(signum, frame):
 #    print 'saving results.csv'
@@ -49,8 +47,10 @@ if __name__ == "__main__":
         except Exception:
             params = PARAMS[setting]
 
+    human_config_data = common.load_human_config_json()
+
     # params["data_dir"] = os.path.dirname(ROOT_DIR) + "/OpenLockResults/subjects"
-    params["data_dir"] = "~/Desktop/Mass/OpenLockLearningResults/subjects"
+    params["data_dir"] = human_config_data["HUMAN_SAVE_DIR"]
     params["src_dir"] = "/tmp/openlocklearner/" + str(hash(time.time())) + "/src/"
     params["use_physics"] = True
     params["effect_probabilities"] = generate_effect_probabilities()

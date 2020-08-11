@@ -1,0 +1,7 @@
+{
+  "DATA_BASE_PATH":"~/Desktop/OpenLockLearnerData",
+  "CAUSAL_CHAIN_PICKLE": "/openlocklearner_causal_chain_space.pickle",
+  "TWO_SOLUTION_SCHEMA_PICKLE": "/two_solution_schemas.pickle",
+  "THREE_SOLUTION_SCHEMA_PICKLE": "/three_solution_schemas.pickle",
+  "PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH": "~/Desktop/Mass/CausalLearnerPickleData/perceptually_causal_relation_data.pickle"
+}

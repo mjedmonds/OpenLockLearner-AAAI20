@@ -2,7 +2,7 @@ import torch
 import os
 import numpy as np
 
-from openlockagents.agent import Agent, DEBUGGING
+from openlockagents.common.agent import Agent, DEBUGGING
 
 from openlockagents.PPO.model import DiscretePolicy
 from openlockagents.PPO.model import Value

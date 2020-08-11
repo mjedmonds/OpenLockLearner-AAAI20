@@ -4,11 +4,11 @@ import multiprocessing
 import heapq
 import numpy as np
 import argparse
-import pickle as pkl
 
 from shutil import copytree, ignore_patterns
 
 from openlockagents.OpenLockLearner.causal_classes.CausalRelation import CausalRelationType
+import openlockagents.common.common as common
 
 # typedef for values to use during chain generation
 GRAPH_INT_TYPE = np.uint8
@@ -131,35 +131,26 @@ def get_lowest_N_idxs(N, arr, max_value=None):
     return result_idxs
 
 
-with open("openlockagents/OpenLockLearner/config.json") as json_data_file:
-    config_data = json.load(json_data_file)
+def load_openlock_learner_config_json(path="openlockagents/OpenLockLearner/openlock_learner_config.json"):
+    return common.load_json_config(path)
 
-FIXED_STRUCTURE_GRAPH_PATH = os.path.expanduser(
-    config_data["FIXED_STRUCTURE_GRAPH_PATH"]
-)
-FIXED_STRUCTURE_ATTRIBUTES_GRAPH_PATH = os.path.expanduser(
-    config_data["FIXED_STRUCTURE_ATTRIBUTES_GRAPH_PATH"]
-)
-FIXED_STRUCTURE_ATTRIBUTES_GRAPH_TWO_STEP_TESTING_PATH = os.path.expanduser(
-    config_data["FIXED_STRUCTURE_ATTRIBUTES_GRAPH_TWO_STEP_TESTING_PATH"]
-)
-FIXED_STRUCTURE_ATTRIBUTES_GRAPH_SIMPLIFIED_TESTING_PATH = os.path.expanduser(
-    config_data["FIXED_STRUCTURE_ATTRIBUTES_GRAPH_SIMPLIFIED_TESTING_PATH"]
-)
-ARBITRARY_STRUCTURE_GRAPH_PATH = os.path.expanduser(
-    config_data["ARBITRARY_STRUCTURE_GRAPH_PATH"]
-)
-# path to human
-HUMAN_MAT_DATA_PATH = os.path.expanduser(config_data["HUMAN_MAT_DATA_PATH"])
-HUMAN_JSON_DATA_PATH = os.path.expanduser(config_data["HUMAN_JSON_DATA_PATH"])
-HUMAN_PICKLE_DATA_PATH = os.path.expanduser(config_data["HUMAN_PICKLE_DATA_PATH"])
-PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH = os.path.expanduser(
-    config_data["PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH"]
-)
 
-# causal chain manager to use
-# CAUSAL_GRAPH_MANAGER_BACKEND = "CausalChainManagerPythonLists"
-CAUSAL_GRAPH_MANAGER_BACKEND = "CausalChainManagerNumpy"
+def setup_structure_space_paths(config_data=None):
+    if not config_data:
+        config_data = load_openlock_learner_config_json()
+
+    causal_chain_structure_space_path = os.path.expanduser(
+        config_data["DATA_BASE_PATH"] + config_data["CAUSAL_CHAIN_PICKLE"]
+    )
+    two_solution_schemas_structure_space_path = os.path.expanduser(
+        config_data["DATA_BASE_PATH"] + config_data["TWO_SOLUTION_SCHEMA_PICKLE"]
+    )
+    three_solution_schemas_structure_space_path = os.path.expanduser(
+        config_data["DATA_BASE_PATH"] + config_data["THREE_SOLUTION_SCHEMA_PICKLE"]
+    )
+
+    return causal_chain_structure_space_path, two_solution_schemas_structure_space_path, three_solution_schemas_structure_space_path
+
 
 ACTION_REGEX_STR = "action([0-9]+)"
 STATE_REGEX_STR = "state([0-9]+)"
@@ -311,39 +302,6 @@ PLAUSIBLE_CPT_CHOICES = [
 def print_message(trial_count, attempt_count, message, print_message=True):
     if print_message:
         print("T{}.A{}: ".format(trial_count, attempt_count) + message)
-
-
-def pretty_write(json_str, filename):
-    """
-    Write json_str to filename with sort_keys=True, indents=4.
-
-    :param filename: Name of file to be output.
-    :param json_str: JSON str to write (e.g. from jsonpickle.encode()).
-    :return: Nothing.
-    """
-    with open(filename, "w") as outfile:
-        # reencode to pretty print
-        json_obj = json.loads(json_str)
-        json_str = json.dumps(json_obj, indent=4, sort_keys=True)
-        outfile.write(json_str)
-
-        # results_dir = trial_dir + '/results'
-        # os.makedirs(results_dir)
-        # for j in range(len(trial.attempt_seq)):
-        #     attempt = trial.attempt_seq[j]
-        #     results = attempt.results
-        #     np.savetxt(results_dir + '/results_attempt' + str(j) + '.csv', results, delimiter=',', fmt='%s')
-
-
-def write_pickle(obj, filename):
-    with open(filename, "wb") as f:
-        pkl.dump(obj, f)
-
-
-def load_pickle(filename):
-    with open(filename, "rb") as f:
-        obj = pkl.load(f)
-        return obj
 
 
 def merge_perceptually_causal_relations_from_dict_of_trials(

@@ -9,9 +9,9 @@ from openlockagents.OpenLockLearner.causal_classes.CausalRelation import (
     CausalObservation,
 )
 from openlockagents.OpenLockLearner.util.common import (
-    PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH,
+    load_openlock_learner_config_json
 )
-from openlockagents.OpenLockLearner.io.data_loader import (
+from openlockagents.common.io.log_io import (
     load_human_data_pickle,
 )
 
@@ -163,12 +163,14 @@ def remove_state_from_perceptually_causal_relations(causal_relations, state_name
 
 
 def write_perceptually_causal_relations(causal_relations):
-    with open(PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH, "wb") as outfile:
+    openlock_learner_config_data = load_openlock_learner_config_json()
+    with open(openlock_learner_config_data["PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH"], "wb") as outfile:
         pickle.dump(causal_relations, outfile)
 
 
 def load_perceptually_causal_relations():
-    with open(PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH, "rb") as infile:
+    openlock_learner_config_data = load_openlock_learner_config_json()
+    with open(openlock_learner_config_data["PERCEPTUALLY_CAUSAL_RELATION_DATA_PATH"], "rb") as infile:
         return pickle.load(infile)
 
 

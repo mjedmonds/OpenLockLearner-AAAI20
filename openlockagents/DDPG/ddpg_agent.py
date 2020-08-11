@@ -1,12 +1,10 @@
 import numpy as np
-import random
 import os
 import copy
-from collections import deque
 import tensorflow.contrib.slim as slim
 import tensorflow as tf
 
-from openlockagents.agent import Agent, DEBUGGING
+from openlockagents.common.agent import Agent, DEBUGGING
 
 
 class DAgent(Agent):

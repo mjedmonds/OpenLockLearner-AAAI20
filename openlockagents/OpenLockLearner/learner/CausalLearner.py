@@ -10,7 +10,7 @@ from openlockagents.OpenLockLearner.causal_classes.CausalRelation import (
     CausalRelationType,
 )
 from openlockagents.OpenLockLearner.learner.ChainPruner import ChainPruner
-from openlockagents.common import DEBUGGING
+from openlockagents.common.common import DEBUGGING
 
 
 

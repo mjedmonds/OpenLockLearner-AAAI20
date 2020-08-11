@@ -1,0 +1,7 @@
+{
+  "HUMAN_SAVE_DIR": "~/Desktop/OpenLockHumanResults/",
+  "HUMAN_PLOT_DATA_DIR": "~/Dropbox/Research/Causality/OpenLockExtra/ProbabalisticOpenLock/",
+  "HUMAN_MAT_DATA_PATH":  "../../OpenLockResultsDataProcessing/all_matlab_dat",
+  "HUMAN_JSON_DATA_PATH": "../../OpenLockResultsDataProcessing/all",
+  "HUMAN_PICKLE_DATA_PATH": "~/Desktop/Mass/CausalLearnerPickleData/subject_data.pickle"
+}

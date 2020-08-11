@@ -23,3 +23,8 @@ more_itertools
 pydot
 python-constraint
 cython
+graphviz
+joblib
+networkx
+dill
+pandas
